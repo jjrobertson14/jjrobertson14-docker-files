@@ -1,0 +1,8 @@
+FROM ubuntu:20.04
+RUN mkdir /rhythm_dev
+COPY . /rhythm_dev/
+RUN yes |unminimize
+RUN apt-get -y update && apt-get -y upgrade && yes apt-get -y install sudo less vim micro git golang-go
+RUN bash ./pwsh-install.sh
+RUN go get -u github.com/justjanne/powerline-go
+RUN source .bash_profile
