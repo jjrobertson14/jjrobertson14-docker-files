@@ -1,8 +1,11 @@
 FROM ubuntu:20.04
-RUN mkdir /rhythm_dev
-COPY . /rhythm_dev/
+
 RUN yes |unminimize
-RUN apt-get -y update && apt-get -y upgrade && yes apt-get -y install sudo less vim micro git golang-go
+RUN apt-get -y update && apt-get -y upgrade && apt-get -y install sudo less vim micro git golang-go bzip2
+
+COPY ./rhythm_dev.tar.bz2 /
+RUN bunzip2 rhythm_dev.tar.bz2 |xargs -I{} tar -xf {}
+COPY ./Dockerfile rhythm_dev/
 RUN bash ./pwsh-install.sh
 RUN go get -u github.com/justjanne/powerline-go
 RUN source .bash_profile
