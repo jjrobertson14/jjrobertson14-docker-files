@@ -3,7 +3,7 @@ FROM ubuntu:20.04
 ARG DEBIAN_FRONTEND=noninteractive
 ENV TZ=America/New_York
 RUN yes |unminimize
-RUN apt-get -y update && apt-get -y upgrade && apt-get -y install sudo less vim micro git golang-go bzip2
+RUN apt-get update -y && apt-get upgrade -y && apt-get install -y sudo less vim micro git golang-go bzip2
 
 # set timezone
 RUN ln -fs /usr/share/zoneinfo/America/New_York /etc/localtime
