@@ -9,7 +9,7 @@ RUN ln -fs /usr/share/zoneinfo/America/New_York /etc/localtime
 RUN dpkg-reconfigure --frontend noninteractive tzdata
 
 COPY ./home_rhythm.tar.bz2 /home/rhythm
-RUN bunzip2 home_rhythm.tar.bz2 && tar -xf home_rhythm.tar
+RUN bunzip2 home_rhythm.tar.bz2 && tar -xf home_rhythm.tar && mv home_rhythm/* . && rm home_rhythm
 
 # run initial commands as rhythm
 RUN cd /home/rhythm && sudo -u rhythm go get -u github.com/justjanne/powerline-go && sudo -u rhythm ln -s /rhythm_dev .
