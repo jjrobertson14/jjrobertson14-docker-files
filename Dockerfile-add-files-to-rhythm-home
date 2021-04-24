@@ -10,6 +10,7 @@ RUN dpkg-reconfigure --frontend noninteractive tzdata
 
 # add files to /home/rhythm
 COPY ./home_rhythm.tar.bz2 /home/rhythm
-RUN cd /home/rhythm && bunzip2 home_rhythm.tar.bz2 && tar -xf home_rhythm.tar && find home_rhythm/* -exec mv {} . \; && rmdir home_rhythm
+RUN bunzip2 /home/rhythm/home_rhythm.tar.bz2 && tar -xf /home/rhythm/home_rhythm.tar
+# RUN bunzip2 /home/rhythm/home_rhythm.tar.bz2 && tar -xf /home/rhythm/home_rhythm.tar -C /home/rhythm && find /home/rhythm/home_rhythm/.[!.]* -exec mv {} /home/rhythm/ \; && find /home/rhythm/home_rhythm/* -exec mv {} /home/rhythm/ \; > /dev/null 2>&1 && rmdir /home/rhythm/home_rhythm
 # run initial commands as rhythm
 RUN cd /home/rhythm && sudo -u rhythm go get -u github.com/justjanne/powerline-go && sudo -u rhythm ln -s /rhythm_dev .
