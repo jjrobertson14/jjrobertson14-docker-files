@@ -1,0 +1,12 @@
+FROM jjrobertson14/rhythm_dev:created_rhythm_user
+
+ARG DEBIAN_FRONTEND=noninteractive
+ENV TZ=America/New_York
+RUN apt-get update -y && apt-get upgrade -y
+
+# set timezone
+RUN ln -fs /usr/share/zoneinfo/America/New_York /etc/localtime
+RUN dpkg-reconfigure --frontend noninteractive tzdata
+
+COPY ./home_rhythm.tar.bz2 /home/rhythm
+RUN bunzip2 home_rhythm.tar.bz2 && tar -xf home_rhythm.tar
